@@ -2,11 +2,15 @@
 
 # Members:
 
+###|-----------------------------------------------|
+
 ## Devs: 
 ### Mikey Clarke
 ### William Soijer
 ### Jayden Macbean
 ### Gael Griffith
+
+###|-----------------------------------------------|
 
 ## Artists
 ### Luc Lauwers
