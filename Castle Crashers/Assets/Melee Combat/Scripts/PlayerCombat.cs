@@ -8,80 +8,26 @@ public class PlayerCombat : MonoBehaviour
 	public Transform AttackPoint;
 	public float AttackRange = 0.5f;
 	public LayerMask enemyLayers;
-	private bool Attacking = false;
-	private bool FollowUp1 = false;
-	public int AttackCombo = 0;
-	ComboHit Combo = ComboHit.Attack1;
+	public int LightAttackCombo = 0;
+	public bool CanAttack = true;
 
+
+	private void Start()
+	{
+		CanAttack = true;
+		LightAttackCombo = 0;
+		
+	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			AttackCombo++;
-		}
-
-		
-
-		switch (Combo)
-		{
-			case ComboHit.Attack1:
-				if (Input.GetKeyDown(KeyCode.J))
-				{
-					LightAttack();
-				}
-				break;
-			case ComboHit.Attack2:
-				LightAttackFollow();
-				break;
-			default:
-				break;
+			ComboStarter();
+			Mathf.Clamp(LightAttackCombo, 0, 2);
 		}
 	}
 
-
-	void LightAttack()
-	{
-		Attacking = true;
-		animator.SetInteger("animation", 1);
-		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, enemyLayers);
-
-		foreach (Collider2D enemy in hitEnemies)
-		{
-			Debug.Log("We hit" + enemy.name);
-		}
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttack") && AttackCombo == 2)
-		{
-			Combo = ComboHit.Attack2;
-		}
-		else if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttack") && AttackCombo == 1)
-		{
-			Combo = ComboHit.Attack1;
-			AttackCombo = 0;
-			animator.SetInteger("animation", 0);
-		}
-
-
-	}
-
-	void LightAttackFollow()
-	{	
-		Attacking = true;
-		animator.SetInteger("animation",2);
-		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, enemyLayers);
-
-		foreach (Collider2D enemy in hitEnemies)
-		{
-			Debug.Log("We hit" + enemy.name);
-		}
-		
-	
-	}
-
-	void DoingFollowUp()
-	{
-		FollowUp1 = true;
-	}
 
 	private void OnDrawGizmosSelected()
 	{
@@ -91,17 +37,54 @@ public class PlayerCombat : MonoBehaviour
 		}
 		Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
 	}
-
-	void AttackingFalse()
+	
+	void CollisionCheck()
 	{
-		Attacking = false;
-		FollowUp1 = false;
+		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, enemyLayers);
+
+		foreach (Collider2D enemy in hitEnemies)
+		{
+			Debug.Log("We hit" + enemy.name);
+		}
 	}
 
-	enum ComboHit
+	void ComboChecker()
 	{
-		Attack1,Attack2
+		CanAttack = false;
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttack") && LightAttackCombo >= 2)
+		{
+			animator.SetInteger("animation", 2);
+			CanAttack = true;
+			LightAttackCombo = 0;
+
+		}
+		else
+		{
+			animator.SetInteger("animation", 0);
+			CanAttack = true;
+			LightAttackCombo = 0;
+			print("Kanker Progamma");
+		}
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttackFollow") && LightAttackCombo >= 3)
+		{
+			animator.SetInteger("animation", 0);
+			LightAttackCombo = 0;
+			CanAttack = true;
+			
+		}
 	}
 
+	void ComboStarter()
+	{
+		if (CanAttack)
+		{
+			LightAttackCombo++;
+		}
+		if (LightAttackCombo == 1)
+		{
+			animator.SetInteger("animation", 1);
+
+		}
+	}
 }
  
