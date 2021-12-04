@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
 	public Transform AttackPoint;
 	public float AttackRange = 0.5f;
 	public LayerMask enemyLayers;
+	public LayerMask EnemyLayer2;
 	public int LightAttackCombo = 0;
 	public bool CanAttack = true;
 
@@ -41,8 +42,13 @@ public class PlayerCombat : MonoBehaviour
 	void CollisionCheck()
 	{
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, enemyLayers);
+		Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer2);
 
 		foreach (Collider2D enemy in hitEnemies)
+		{
+			Debug.Log("We hit" + enemy.name);
+		}
+		foreach (Collider2D enemy in hitEnemies2)
 		{
 			Debug.Log("We hit" + enemy.name);
 		}
