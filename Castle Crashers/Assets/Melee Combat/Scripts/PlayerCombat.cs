@@ -69,7 +69,6 @@ public class PlayerCombat : MonoBehaviour
 			animator.SetInteger("animation", 0);
 			CanAttack = true;
 			LightAttackCombo = 0;
-			print("Kanker Progamma");
 		}
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttackFollow") && LightAttackCombo >= 3)
 		{
