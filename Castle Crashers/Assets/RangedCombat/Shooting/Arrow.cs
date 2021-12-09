@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 
 public class Arrow : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody rb;
 
     public GameObject player;
 
@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
          
     }
 
@@ -40,7 +40,7 @@ public class Arrow : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "pTag")
         {

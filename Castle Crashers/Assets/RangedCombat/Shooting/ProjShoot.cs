@@ -32,7 +32,7 @@ public class ProjShoot : MonoBehaviour
         {
             GameObject projIns = Instantiate(projectile, firePoint.position, transform.rotation);
 
-            projIns.GetComponent<Rigidbody2D>().AddForce(transform.right * launchForce);
+            projIns.GetComponent<Rigidbody>().AddForce(transform.right * launchForce);
         }
 
         projOnScreen = true;
