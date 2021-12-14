@@ -57,26 +57,32 @@ public class PlayerCombat : MonoBehaviour
 	void ComboChecker()
 	{
 		CanAttack = false;
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttack") && LightAttackCombo >= 2)
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") && LightAttackCombo >= 2)
 		{
 			animator.SetInteger("animation", 2);
 			CanAttack = true;
+			print("2");
+		}
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") && LightAttackCombo >= 3)
+		{
+			animator.SetInteger("animation", 3);
+			CanAttack = true;
+			print("3");
+		}
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3") && LightAttackCombo >= 4)
+		{
+			animator.SetInteger("animation", 0);
 			LightAttackCombo = 0;
+			CanAttack = true;
+			print("3");
+		}
+	}
 
-		}
-		else
-		{
-			animator.SetInteger("animation", 0);
-			CanAttack = true;
-			LightAttackCombo = 0;
-		}
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("LightAttackFollow") && LightAttackCombo >= 3)
-		{
-			animator.SetInteger("animation", 0);
-			LightAttackCombo = 0;
-			CanAttack = true;
-			
-		}
+	void ReturnToIdle()
+	{
+		animator.SetInteger("animation", 0);
+		CanAttack = true;
+		LightAttackCombo = 0;
 	}
 
 	void ComboStarter()
@@ -88,6 +94,7 @@ public class PlayerCombat : MonoBehaviour
 		if (LightAttackCombo == 1)
 		{
 			animator.SetInteger("animation", 1);
+			print("1");
 
 		}
 	}
