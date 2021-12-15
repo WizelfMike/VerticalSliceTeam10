@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
 	public LayerMask enemyLayers;
 	public LayerMask EnemyLayer2;
 	public int LightAttackCombo = 0;
+	public int HeavyAttackCombo = 0;
 	public bool CanAttack = true;
 
 
@@ -22,11 +23,7 @@ public class PlayerCombat : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			ComboStarter();
-			Mathf.Clamp(LightAttackCombo, 0, 2);
-		}
+
 	}
 
 
@@ -57,19 +54,13 @@ public class PlayerCombat : MonoBehaviour
 	void ComboChecker()
 	{
 		CanAttack = false;
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") && LightAttackCombo >= 2)
-		{
-			animator.SetInteger("animation", 2);
-			CanAttack = true;
-			print("2");
-		}
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") && LightAttackCombo >= 3)
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") && LightAttackCombo >= 2)
 		{
 			animator.SetInteger("animation", 3);
 			CanAttack = true;
 			print("3");
 		}
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3") && LightAttackCombo >= 4)
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3") && LightAttackCombo >= 3)
 		{
 			animator.SetInteger("animation", 0);
 			LightAttackCombo = 0;
@@ -85,17 +76,33 @@ public class PlayerCombat : MonoBehaviour
 		LightAttackCombo = 0;
 	}
 
+	public void OnAttack()
+	{
+		ComboStarter();
+		LightAttackCombo++;
+		Mathf.Clamp(LightAttackCombo, 0, 2);
+	}
+
+	public void OnHeavyAttack()
+	{
+		ComboStarter();
+		HeavyAttackCombo++;
+		Mathf.Clamp(LightAttackCombo, 0, 2);
+	}
+
 	void ComboStarter()
 	{
-		if (CanAttack)
-		{
-			LightAttackCombo++;
-		}
 		if (LightAttackCombo == 1)
 		{
-			animator.SetInteger("animation", 1);
+			animator.SetInteger("animation", 2);
 			print("1");
 
+		}
+
+		if (HeavyAttackCombo == 1)
+		{
+			animator.SetInteger("animation", 2);
+			print("1");
 		}
 	}
 }
