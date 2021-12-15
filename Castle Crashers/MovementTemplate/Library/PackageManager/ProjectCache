@@ -6,8 +6,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637745662040071359
-    m_Hash: 1641546182
+      ticks: 637746399924565146
+    m_Hash: 4070978512
   m_LockFileStatus:
     m_FilePath: C:/Users/mikey/Documents/Ma/Bewijzenmap/X 2/Y 2 (Vertical Slice)/BO/VerticalSliceTeam10/Castle
       Crashers/MovementTemplate/Packages/packages-lock.json
@@ -15,8 +15,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637745662167392679
-    m_Hash: 1049041275
+      ticks: 637746399924575141
+    m_Hash: 2142867407
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
