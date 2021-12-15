@@ -40,7 +40,7 @@
                     "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false

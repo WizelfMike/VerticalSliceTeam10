@@ -18,6 +18,7 @@ public class PlayerCombat : MonoBehaviour
 	{
 		CanAttack = true;
 		LightAttackCombo = 0;
+		HeavyAttackCombo = 0;
 		
 	}
 
@@ -38,14 +39,14 @@ public class PlayerCombat : MonoBehaviour
 	
 	void CollisionCheck()
 	{
-		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, enemyLayers);
-		Collider2D[] hitEnemies2 = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer2);
+		Collider[] hitEnemies = Physics.OverlapSphere(AttackPoint.position, AttackRange, enemyLayers);
+		Collider[] hitEnemies2 = Physics.OverlapSphere(AttackPoint.position, AttackRange, EnemyLayer2);
 
-		foreach (Collider2D enemy in hitEnemies)
+		foreach (Collider enemy in hitEnemies)
 		{
 			Debug.Log("We hit" + enemy.name);
 		}
-		foreach (Collider2D enemy in hitEnemies2)
+		foreach (Collider enemy in hitEnemies2)
 		{
 			Debug.Log("We hit" + enemy.name);
 		}
@@ -53,6 +54,7 @@ public class PlayerCombat : MonoBehaviour
 
 	void ComboChecker()
 	{
+		CollisionCheck();
 		CanAttack = false;
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") && LightAttackCombo >= 2)
 		{
@@ -74,19 +76,20 @@ public class PlayerCombat : MonoBehaviour
 		animator.SetInteger("animation", 0);
 		CanAttack = true;
 		LightAttackCombo = 0;
+		HeavyAttackCombo = 0;
 	}
 
 	public void OnAttack()
 	{
-		ComboStarter();
 		LightAttackCombo++;
+		ComboStarter();
 		Mathf.Clamp(LightAttackCombo, 0, 2);
 	}
 
 	public void OnHeavyAttack()
 	{
-		ComboStarter();
 		HeavyAttackCombo++;
+		ComboStarter();
 		Mathf.Clamp(LightAttackCombo, 0, 2);
 	}
 
@@ -95,14 +98,14 @@ public class PlayerCombat : MonoBehaviour
 		if (LightAttackCombo == 1)
 		{
 			animator.SetInteger("animation", 2);
-			print("1");
+			print("Light Attack");
 
 		}
 
 		if (HeavyAttackCombo == 1)
 		{
-			animator.SetInteger("animation", 2);
-			print("1");
+			animator.SetInteger("animation", 1);
+			print("Heavy Attack");
 		}
 	}
 }
