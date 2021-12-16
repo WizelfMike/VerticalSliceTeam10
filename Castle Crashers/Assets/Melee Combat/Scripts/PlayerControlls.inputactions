@@ -55,11 +55,11 @@
                 },
                 {
                     "name": "",
-                    "id": "6dafeb5e-91ac-4357-8ad8-4995ea716513",
+                    "id": "fb19f7ac-bca3-4833-a203-363c5b4169bf",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "MoveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
