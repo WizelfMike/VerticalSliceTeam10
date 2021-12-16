@@ -840,6 +840,7 @@ MonoBehaviour:
   LightAttackCombo: 0
   HeavyAttackCombo: 0
   CanAttack: 1
+  health: {fileID: 0}
 --- !u!95 &3751200688178665909
 Animator:
   serializedVersion: 3

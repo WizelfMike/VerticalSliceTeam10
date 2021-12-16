@@ -291,6 +291,7 @@ MonoBehaviour:
   LightAttackCombo: 0
   HeavyAttackCombo: 0
   CanAttack: 1
+  health: {fileID: 0}
 --- !u!1 &4351502302186080805
 GameObject:
   m_ObjectHideFlags: 0
