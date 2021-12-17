@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
 	public List<Transform> targets;
-
+	public GameObject[] Players;
 	public Vector3 Offset;
 	public float SmoothTime = .5f;
 	public float minZoom = 40f;
@@ -22,6 +22,7 @@ public class CameraMovement : MonoBehaviour
 
 	private void LateUpdate()
 	{
+
 		if (targets.Count == 0)
 		{
 			return;

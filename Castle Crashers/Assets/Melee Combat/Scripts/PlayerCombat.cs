@@ -14,6 +14,7 @@ public class PlayerCombat : MonoBehaviour
 	public int HeavyAttackCombo = 0;
 	public bool CanAttack = true;
 	public HealthSystem health;
+	private bool IsAttacking = false;
 
 
 	private void Start()
@@ -85,18 +86,24 @@ public class PlayerCombat : MonoBehaviour
 		HeavyAttackCombo = 0;
 	}
 
-	public void OnAttack()
+	public void Attack(InputAction.CallbackContext ctx)
 	{
-		LightAttackCombo++;
-		ComboStarter();
-		Mathf.Clamp(LightAttackCombo, 0, 2);
+		if (ctx.performed)
+		{
+			LightAttackCombo++;
+			ComboStarter();
+			Mathf.Clamp(LightAttackCombo, 0, 2);
+		}
 	}
 
-	public void OnHeavyAttack()
+	public void HeavyAttack(InputAction.CallbackContext ctx)
 	{
-		HeavyAttackCombo++;
-		ComboStarter();
-		Mathf.Clamp(LightAttackCombo, 0, 2);
+		if (ctx.performed)
+		{
+			HeavyAttackCombo++;
+			ComboStarter();
+			Mathf.Clamp(LightAttackCombo, 0, 2);
+		}
 	}
 
 	void ComboStarter()

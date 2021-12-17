@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Movement : MonoBehaviour
 
     public int jumpHeight;
 
-    private bool onGround;
+    public bool onGround;
 
     public Transform t_player;
     public Transform t_shadow;
@@ -19,8 +20,22 @@ public class Movement : MonoBehaviour
     public Animator anim;
     public bool m_IsWalking;
     public bool m_IsJumping;
+    public PlayerControlls playercontroller;
 
-    private void Start()
+    Vector2 moveDirection = Vector2.zero;
+
+    //
+	void Awake()
+	{
+		/*playercontroller = new PlayerControlls();
+		playercontroller.Enable();*/
+		/*playercontroller.Player.Movement.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
+        playercontroller.Player.Movement.canceled += ctx => moveDirection = Vector2.zero;*/
+
+	}
+
+
+	private void Start()
     {
         rb = GetComponent<Rigidbody>();
         m_IsWalking = false;
@@ -29,51 +44,40 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal") * Time.deltaTime * horispeed;
-        float vertical = Input.GetAxis("Vertical") * Time.deltaTime * verspeed;
+
+        float horizontal = moveDirection.x * Time.deltaTime * horispeed;
+        float vertical = moveDirection.y * Time.deltaTime * verspeed;
 
         transform.Translate(horizontal, 0, vertical);
 
-        if (Input.GetButtonDown("Jump") && onGround)
-        {
-            rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
-            onGround = false;
-            m_IsWalking = false;
-            m_IsJumping = true;
-        }
-
-        if (onGround)
-        {
-            m_IsJumping = false;
-        }
-
-        if (Input.GetAxisRaw("Vertical") < 0)
+        if (vertical > 0)
         {
             m_IsWalking = true;
         }
-        if (Input.GetAxisRaw("Vertical") < 0)
+        if (vertical < 0)
         {
             m_IsWalking = true;
         }
-        if (Input.GetAxisRaw("Vertical") == 0)
+        if (vertical == 0)
         {
             m_IsWalking = false;
         }
-        if (Input.GetAxisRaw("Horizontal") > 0)
+        if (horizontal > 0)
         {
             player.flipX = true;
             m_IsWalking = true;
         }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
+        else if (horizontal < 0)
         {
             player.flipX = false;
             m_IsWalking = true;
         }
-        if (Input.GetAxisRaw("Horizontal") == 0)
+        if (horizontal == 0)
         {
             m_IsWalking = false;
         }
 
+        // Setting Animation bools True. Nothing more.
         if (m_IsWalking == true)
         {
             anim.SetBool("IsWalking", true);
@@ -94,7 +98,33 @@ public class Movement : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Jump()
+	{
+		if (onGround)
+		{
+            rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
+            onGround = false;
+            m_IsWalking = false;
+            m_IsJumping = true;
+        }
+		else
+		{
+            return;
+		}
+    }
+    public void Moving(InputAction.CallbackContext ctx) => moveDirection = ctx.ReadValue<Vector2>();
+
+/*	void OnEnable()
+	{
+		playercontroller.Player.Enable();
+	}
+
+	void OnDisable()
+	{
+		playercontroller.Player.Disable();
+	}*/
+
+	private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "Floor")
         {
