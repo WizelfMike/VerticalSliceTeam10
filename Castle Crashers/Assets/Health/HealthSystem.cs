@@ -16,6 +16,8 @@ public class HealthSystem : MonoBehaviour
 	public Slider HealthSlider;
 	public float SliderTime;
 	public GameObject Player;
+	public Animator animator;
+	public bool Dead = false;
 
 	void Start()
 	{
@@ -30,6 +32,10 @@ public class HealthSystem : MonoBehaviour
 		if (PlayerHealth <= 0)
 		{
 			Die();
+		}
+		if (Dead)
+		{
+			
 		}
 	}
 
@@ -57,6 +63,15 @@ public class HealthSystem : MonoBehaviour
 
 	void Die()
 	{
+		StartCoroutine(StopGame());
 		Player.SetActive(!Player.activeSelf);
+		animator.SetInteger("animation", 5);
+		Dead = true;
+	}
+
+	IEnumerator StopGame()
+	{
+		yield return new WaitForSeconds(5);
+		Application.Quit();
 	}
 }
