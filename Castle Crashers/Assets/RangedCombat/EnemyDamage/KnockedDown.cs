@@ -4,62 +4,87 @@ using UnityEngine;
 
 public class KnockedDown : MonoBehaviour
 {
-    Collider2D hurtbox;
-    public Transform hurtboxPoint;
-    public Vector2 hurtboxSize;
-    private LayerMask pLayer;
+    public Rigidbody player;
 
-
-    SpriteRenderer CubeRenderer;
-    Color knockdownColor = Color.black;
+    [Header("Knockdown Effects")]
+    MeshRenderer cubeRenderer;
+    Color knockdownColor = Color.white;
     Color originColor;
 
 
 
     //Time before the player's allowed to stand up n have fun again
+    [Header("Knockdown Stats")]
     private float stand_Up_Timer = 2f;
-     
-     
+    public float blowback;
+    public float movementCooldown = 0;
+    public float blowbackLength = 500;
+    public float blowbackHeight = 500;
+
+
+
     void Start()
     {
-        //hurtbox = Physics2D.OverlapBox(hurtboxPoint.position, hurtboxSize, enemyLayer);
-        CubeRenderer = GetComponent<SpriteRenderer>();
-        originColor = CubeRenderer.material.color;
+        player = GetComponent<Rigidbody>();
+        cubeRenderer = GetComponent<MeshRenderer>();
+        originColor = cubeRenderer.material.color;
     }
 
      
     void Update()
     {
-        Knockdown();
-    }
-
-    public void Knockdown()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            GetComponent<Collider2D>().enabled = false;
-            Debug.Log("You got knocked down bitch");
-            CubeRenderer.material.color = knockdownColor;
-            WakeUp();
-        }
          
     }
 
-    /*private void OnDrawGizmosSelected()
+    
+
+    /*void Knockdown(Collision collision)
     {
-        Gizmos.DrawCube(hurtboxPoint.position, hurtboxSize);
+        //Functie veranderen input naar een bool check, if playerGotHit == true...
+        if (collision.collider.tag == "Ground")
+        {
+
+            Debug.Log("You got knocked down bitch");
+            cubeRenderer.material.color = knockdownColor;
+            player.velocity = Vector2.zero;
+            StartCoroutine(StandUpAfterTime());
+
+        }
+            
+        
+        
+         
     }*/
 
-    void WakeUp()
+    public void Knockback(Collision col)
     {
-            StartCoroutine(StandUpAfterTime());
-    }
+         
+        if (movementCooldown >= 0)
+        {
+            Debug.Log(player);
 
+            Debug.Log("Knockback activate");
+            player.AddForce(blowback, blowbackHeight, 0, ForceMode.Force);
+            player.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            if (col.collider.tag == "Ground")
+            {
+                StartCoroutine(StandUpAfterTime());
+            }
+
+        }
+
+
+    }
+    
     IEnumerator StandUpAfterTime()
     {
+        Physics.IgnoreLayerCollision(8, 8, true);
+        Debug.Log("This is running");
+        cubeRenderer.material.color = knockdownColor;
         yield return new WaitForSeconds(stand_Up_Timer);
-        GetComponent<Collider2D>().enabled = true;
-        CubeRenderer.material.color = originColor;
+        Physics.IgnoreLayerCollision(8, 8, false);
+        cubeRenderer.material.color = originColor;
         Debug.Log("Back in action");
     }
 }
+

@@ -8,21 +8,21 @@ public class Arrow : MonoBehaviour
 {
     Rigidbody rb;
 
+
+    
     public GameObject player;
 
     public GameObject arrow;
 
     public Transform rotationA;
 
-    private ProjShoot arrOnScreen;
-
-    private KnockedDown getKnockedDown;
+    public KnockedDown getKnockedDown;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-         
+        getKnockedDown = GameObject.Find("Player2").GetComponent<KnockedDown>(); 
     }
 
     // Update is called once per frame
@@ -35,17 +35,17 @@ public class Arrow : MonoBehaviour
     void TrackMovement()
     {
         Vector2 direction = rb.velocity;
-
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "pTag")
+        if (collision.collider.tag == "Player")
         {
-            //getKnockedDown.Knockdown();
             Destroy(arrow);
+            getKnockedDown.Knockback(collision);
+            
         }
 
         else if(collision.collider.tag == "Ground")
@@ -70,7 +70,8 @@ public class Arrow : MonoBehaviour
         rb.isKinematic = true;
         yield return new WaitForSeconds(0.7f);
         Destroy(arrow);
-        //ProjShoot.projOnScreen = false;
     }
 
+
+    //Moet nog een start up animation aanmaken voordat de pijl wordt afgevuurt
 }
