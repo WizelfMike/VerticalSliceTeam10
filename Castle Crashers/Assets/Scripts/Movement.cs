@@ -27,8 +27,8 @@ public class Movement : MonoBehaviour
     //
 	void Awake()
 	{
-		/*playercontroller = new PlayerControlls();
-		playercontroller.Enable();*/
+		playercontroller = new PlayerControlls();
+		playercontroller.Enable();
 		/*playercontroller.Player.Movement.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
         playercontroller.Player.Movement.canceled += ctx => moveDirection = Vector2.zero;*/
 
@@ -64,12 +64,14 @@ public class Movement : MonoBehaviour
         }
         if (horizontal > 0)
         {
-            player.flipX = true;
+            t_player.localScale = new Vector3(-0.15f, 0.15f, 0.15f);
+            t_shadow.localScale = new Vector3(-6.666666f, 6.666666f, 6.666666f);
             m_IsWalking = true;
         }
         else if (horizontal < 0)
         {
-            player.flipX = false;
+            t_player.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+            t_shadow.localScale = new Vector3(6.666666f, 6.666666f, 6.666666f);
             m_IsWalking = true;
         }
         if (horizontal == 0)
@@ -114,7 +116,7 @@ public class Movement : MonoBehaviour
     }
     public void Moving(InputAction.CallbackContext ctx) => moveDirection = ctx.ReadValue<Vector2>();
 
-/*	void OnEnable()
+	void OnEnable()
 	{
 		playercontroller.Player.Enable();
 	}
@@ -122,7 +124,7 @@ public class Movement : MonoBehaviour
 	void OnDisable()
 	{
 		playercontroller.Player.Disable();
-	}*/
+	}
 
 	private void OnCollisionEnter(Collision collision)
     {

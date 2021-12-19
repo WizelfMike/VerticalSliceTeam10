@@ -42,6 +42,8 @@ public class OnlyMoving : MonoBehaviour
         transform.Translate(0, 0, vertical);
     }
 
+    public void Moving(InputAction.CallbackContext ctx) => moveDirection = ctx.ReadValue<Vector2>();
+
     public void OnMovement(InputValue input)
     {
         

@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 3702985216054068477}
   - component: {fileID: 3702985216054068419}
   - component: {fileID: 3702985216054068416}
+  - component: {fileID: 444196859206802994}
   - component: {fileID: 3702985216054068417}
   m_Layer: 15
   m_Name: block head knight
@@ -272,8 +273,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0542441d-e417-48f6-bb4f-a8fccd36041f
     m_ActionName: Player/Jump[/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: XboxController
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -347,6 +348,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &444196859206802994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702985216054068422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667414ddaa679e449a24b798d7f0a775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartHealth: 200
+  PlayerHealth: 200
+  Damage: 0
+  DamageStepSize: 5
+  HealthSlider: {fileID: 0}
+  SliderTime: 0.5
+  Player: {fileID: 0}
 --- !u!114 &3702985216054068417
 MonoBehaviour:
   m_ObjectHideFlags: 0

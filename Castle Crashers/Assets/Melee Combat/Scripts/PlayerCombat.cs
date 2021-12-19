@@ -14,7 +14,6 @@ public class PlayerCombat : MonoBehaviour
 	public int HeavyAttackCombo = 0;
 	public bool CanAttack = true;
 	public HealthSystem health;
-	private bool IsAttacking = false;
 
 
 	private void Start()
@@ -49,13 +48,14 @@ public class PlayerCombat : MonoBehaviour
 		{
 			Debug.Log("We hit" + enemy.name);
 			enemy.GetComponent<HealthSystem>();
-			health.HealthP -= health.Damage;
+			health.PlayerHealth -= health.Damage;
 		}
 		foreach (Collider enemy in hitEnemies2)
 		{
 			Debug.Log("We hit" + enemy.name);
 			enemy.GetComponent<HealthSystem>();
-			health.HealthP -= health.Damage;
+			health.PlayerHealth -= health.Damage;
+
 		}
 	}
 

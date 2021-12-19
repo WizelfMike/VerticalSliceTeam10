@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1820303508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820303509}
+  m_Layer: 16
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820303509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820303508}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8401242733526622794}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8401242733269232501
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8401242733269232500}
   - component: {fileID: 8401242733269232503}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8401242733400724684}
   - component: {fileID: 8401242733400724687}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pointy knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +205,8 @@ GameObject:
   - component: {fileID: 8401242733526622794}
   - component: {fileID: 8401242733526622796}
   - component: {fileID: 8401242733526622797}
-  m_Layer: 0
+  - component: {fileID: 1264599506}
+  m_Layer: 16
   m_Name: AnimationSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +223,9 @@ Transform:
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -0.3, y: 0.561, z: 0.55}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
-  m_Children: []
+  m_Children:
+  - {fileID: 8401242734530932274}
+  - {fileID: 1820303509}
   m_Father: {fileID: 8401242734991575952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
@@ -241,7 +274,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 22.008358, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -266,6 +299,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1264599506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401242733526622795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d73526bbf223174da5e9f70710882b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8401242733526622797}
+  AttackPoint: {fileID: 1820303509}
+  AttackRange: 1
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 32768
+  EnemyLayer2:
+    serializedVersion: 2
+    m_Bits: 131072
+  LightAttackCombo: 0
+  HeavyAttackCombo: 0
+  CanAttack: 1
+  health: {fileID: 0}
 --- !u!1 &8401242733998211279
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8401242733998211278}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PlayerAbsolure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +352,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8401242734991575952}
-  - {fileID: 8401242734530932274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -310,7 +367,7 @@ GameObject:
   - component: {fileID: 8401242734530932279}
   - component: {fileID: 8401242734530932276}
   - component: {fileID: 8401242734530932277}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ShadowHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,13 +381,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8401242734530932275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.302, y: 3.982383, z: -13.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalPosition: {x: 0.32783705, y: -5.3751273, z: -0.08596936}
+  m_LocalScale: {x: 6.666666, y: 6.666666, z: 6.666666}
   m_Children:
   - {fileID: 8401242733269232500}
-  m_Father: {fileID: 8401242733998211278}
-  m_RootOrder: 1
+  m_Father: {fileID: 8401242733526622794}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8401242734530932279
 MonoBehaviour:
@@ -388,7 +445,8 @@ GameObject:
   - component: {fileID: 8401242734991575955}
   - component: {fileID: 8401242734991575953}
   - component: {fileID: 8401242734991575954}
-  m_Layer: 0
+  - component: {fileID: 119072171}
+  m_Layer: 16
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,11 +495,35 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1264599506}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8b7b9258-9378-403f-bd20-999fd0e1ecc2
     m_ActionName: Player/Attack[/Keyboard/j,/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1264599506}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: HeavyAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 34240e24-b6b8-4bfd-9e55-41a0b22d0b22
     m_ActionName: Player/HeavyAttack[/Keyboard/k,/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
@@ -533,3 +615,22 @@ MonoBehaviour:
   anim: {fileID: 8401242733526622797}
   m_IsWalking: 0
   m_IsJumping: 0
+--- !u!114 &119072171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401242734991575966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667414ddaa679e449a24b798d7f0a775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartHealth: 200
+  PlayerHealth: 200
+  Damage: 0
+  DamageStepSize: 5
+  HealthSlider: {fileID: 0}
+  SliderTime: 0.5
+  Player: {fileID: 8401242733998211279}
