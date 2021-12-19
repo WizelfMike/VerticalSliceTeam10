@@ -28,7 +28,7 @@ public class CameraMovement : MonoBehaviour
 			return;
 		}
 		Move();
-		//Zoom();
+		Zoom();
 
 	}
 
@@ -69,9 +69,9 @@ public class CameraMovement : MonoBehaviour
 
 		Movement.z = transform.position.z;
 
-		transform.position = Vector3.SmoothDamp(transform.position, Movement, ref Velocity, SmoothTime);
+		Movement.x = Mathf.Clamp(Movement.x, -3.211144f, 2.952339f);
 
-		
+		transform.position = Vector3.SmoothDamp(transform.position, Movement, ref Velocity, SmoothTime);
 	}
 
 	void Zoom()

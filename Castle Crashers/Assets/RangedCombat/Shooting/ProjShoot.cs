@@ -20,13 +20,13 @@ public class ProjShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
-    }
+		/*if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Shoot();
+		}*/
+	}
 
-    void Shoot()
+    public void Shoot()
     {   
         if(!projOnScreen)
         {
