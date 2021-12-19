@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour
 	public float minZoom = 40f;
 	public float maxZoom = 10f;
 	public float ZoomLimiter = 50f;
+	public Vector3 Movement;
 
 	private Vector3 Velocity;
 	private Camera cam;
@@ -64,9 +65,13 @@ public class CameraMovement : MonoBehaviour
 	{
 		Vector3 CenterPoint = GetCenterPoint();
 
-		Vector3 newPosition = CenterPoint + Offset;
+		Movement = CenterPoint + Offset;
 
-		transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref Velocity, SmoothTime);
+		Movement.z = transform.position.z;
+
+		transform.position = Vector3.SmoothDamp(transform.position, Movement, ref Velocity, SmoothTime);
+
+		
 	}
 
 	void Zoom()
